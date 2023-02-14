@@ -15,4 +15,6 @@ booksRoute.get('/:id', booksController.getBook)
 
 booksRoute.patch('/:id', booksController.updateBook)
 
+booksRoute.delete('/:id', booksController.deleteBook)
+
 module.exports = booksRoute
