@@ -1,6 +1,7 @@
 const express = require('express')
 const rateLimit = require("express-rate-limit")
 const helmet = require('helmet')
+const logger = require("./logging/logger")
 
 const config = require('./config/config')
 const booksRoute = require('./routes/books')
@@ -31,7 +32,7 @@ app.use(helmet())
 app.use('/api/v1/books', booksRoute)
 app.use('/api/v1/authors', authorsRoute)
 
-
+// error handler
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500
     res.status(errorStatus).send(err.message)
@@ -39,5 +40,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(config.PORT, () => {
-    console.log(`App is runing on ${config.PORT}`)
+    logger.info(`App is runing on ${config.PORT}`)
 })
